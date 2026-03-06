@@ -5,7 +5,7 @@ pipeline {
 
         stage('Checkout Code') {
             steps {
-                https://github.com/sauravnirala/nodejs-todo-devops-project.git
+                git branch: 'main', url: 'https://github.com/sauravnirala/nodejs-todo-devops-project.git'
             }
         }
 
@@ -34,7 +34,10 @@ pipeline {
 
         stage('Run Container') {
             steps {
-                sh 'docker run -d -p 8085:80 nodejs-multistage-app'
+                sh '''
+                   docker rm -f nodejscont || true
+                   docker run -d -p 8085:8080 --name nodejscont nodejs-multistage-app
+                   '''
             }
         }
 
