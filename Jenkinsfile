@@ -12,7 +12,7 @@ pipeline {
         stage('Create Dockerfile & Build Image') {
             steps {
                 sh '''
-                cat <<EOF > Dockerfile
+                cat <<'EOF' > Dockerfile
                 # Stage 1 : Build
                 FROM node:18 AS build
                 WORKDIR /app
