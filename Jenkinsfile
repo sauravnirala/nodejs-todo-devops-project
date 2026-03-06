@@ -20,10 +20,10 @@ RUN npm install
 COPY . .
 RUN npm run build
 
-FROM nginx:alpine
-COPY --from=build . /usr/share/nginx/html
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+FROM node:18-alpine
+COPY --from=build /app /app
+EXPOSE 8085
+CMD ["node", "app.js"]
 EOF
 
 cat Dockerfile
@@ -39,7 +39,7 @@ docker build -t nodejs-multistage-app .
                 sh '''
                    docker stop nodejscont || true
                    docker rm nodejscont || true
-                   docker run -d -p 8085:80 --name nodejscont nodejs-multistage-app
+                   docker run -d -p 8085:8080 --name nodejscont nodejs-multistage-app
                    '''
             }
         }
