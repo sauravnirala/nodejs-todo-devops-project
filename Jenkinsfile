@@ -1,34 +1,42 @@
 pipeline {
- agent any
+    agent any
 
- stages {
+    stages {
 
-  stage('Checkout'){
-   steps{
-    git 'https://github.com/sauravnirala/nodejs-todo-devops-project.git'
-   }
-  }
+        stage('Checkout Code') {
+            steps {
+                git 'https://github.com/example/nodejs-app.git'
+            }
+        }
 
-  stage('Install Dependencies'){
-   steps{
-    sh 'npm install'
-   }
-  }
+        stage('Create Dockerfile & Build Image') {
+            steps {
+                sh '''
+                cat <<EOF > Dockerfile
+                # Stage 1 : Build
+                FROM node:18 AS build
+                WORKDIR /app
+                COPY . .
+                RUN npm install
+                RUN npm run build
 
-  stage('Build Docker Image'){
-   steps{
-    sh 'docker build -t todo-node-app .'
-   }
-  }
+                # Stage 2 : Runtime
+                FROM nginx:alpine
+                COPY --from=build /app/build /usr/share/nginx/html
+                EXPOSE 80
+                CMD ["nginx", "-g", "daemon off;"]
+                EOF
 
-  stage('Run Container'){
-   steps{
-    sh '''
-    docker rm -f todoapp || true
-    docker run -d -p 3000:3000 --name todoapp todo-node-app
-    '''
-   }
-  }
+                docker build -t nodejs-multistage-app .
+                '''
+            }
+        }
 
- }
+        stage('Run Container') {
+            steps {
+                sh 'docker run -d -p 8080:80 nodejs-multistage-app'
+            }
+        }
+
+    }
 }
