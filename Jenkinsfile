@@ -28,7 +28,7 @@ EOF
 
 cat Dockerfile
 
-docker build -t nodejs-multistage-app .
+docker build --no-cache -t nodejs-multistage-app .
 '''
     }
 }
