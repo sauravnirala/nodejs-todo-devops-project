@@ -26,8 +26,6 @@ pipeline {
                 EXPOSE 80
                 CMD ["nginx", "-g", "daemon off;"]
                 EOF
-
-                docker build -t nodejs-multistage-app .
                 '''
             }
         }
@@ -35,6 +33,7 @@ pipeline {
         stage('Run Container') {
             steps {
                 sh '''
+                   docker build -t nodejs-multistage-app .
                    docker rm -f nodejscont || true
                    docker run -d -p 8085:80 --name nodejscont nodejs-multistage-app
                    '''
