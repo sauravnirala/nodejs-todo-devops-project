@@ -5,7 +5,7 @@ pipeline {
 
   stage('Checkout'){
    steps{
-    git 'https://github.com/yourusername/nodejs-todo-app.git'
+    git 'https://github.com/sauravnirala/nodejs-todo-devops-project.git'
    }
   }
 
