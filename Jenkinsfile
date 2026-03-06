@@ -37,7 +37,8 @@ docker build -t nodejs-multistage-app .
         stage('Run Container') {
             steps {
                 sh '''
-                   docker rm -f nodejscont || true
+                   docker stop nodejscont || true
+                   docker rm nodejscont || true
                    docker run -d -p 8085:80 --name nodejscont nodejs-multistage-app
                    '''
             }
