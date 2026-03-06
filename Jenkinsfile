@@ -39,7 +39,7 @@ docker build --no-cache -t nodejs-multistage-app .
                 sh '''
                    docker stop nodejscont || true
                    docker rm nodejscont || true
-                   docker run -d -p 8085:8080 --name nodejscont nodejs-multistage-app
+                   docker run -d -p 8085:3000 --name nodejscont nodejs-multistage-app
                    '''
             }
         }
