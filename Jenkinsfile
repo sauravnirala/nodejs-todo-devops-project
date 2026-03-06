@@ -36,7 +36,7 @@ pipeline {
             steps {
                 sh '''
                    docker rm -f nodejscont || true
-                   docker run -d -p 8085:8080 --name nodejscont nodejs-multistage-app
+                   docker run -d -p 8085:80 --name nodejscont nodejs-multistage-app
                    '''
             }
         }
