@@ -16,24 +16,8 @@ pipeline {
         stage('Build Docker Image') {
     steps {
         sh '''
-cat <<EOF > Dockerfile
-FROM node:18 AS build
-WORKDIR /app
-COPY package*.json ./
-RUN npm install
-COPY . .
-RUN npm run build
 
-FROM node:18-alpine
-WORKDIR /app
-COPY --from=build /app /app
-EXPOSE 3000
-CMD ["node", "app.js"]
-EOF
-
-cat Dockerfile
-
-docker build --no-cache -t nodejs-multistage-app .
+          docker build --no-cache -t nodejs-multistage-app .
 '''
     }
 }
