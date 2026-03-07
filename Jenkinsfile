@@ -21,8 +21,9 @@ COPY . .
 RUN npm run build
 
 FROM node:18-alpine
+WORKDIR /app
 COPY --from=build /app /app
-EXPOSE 8085
+EXPOSE 3000
 CMD ["node", "app.js"]
 EOF
 
@@ -39,7 +40,7 @@ docker build --no-cache -t nodejs-multistage-app .
                 sh '''
                    docker stop nodejscont || true
                    docker rm nodejscont || true
-                   docker run -d -p 8085:3000 --name nodejscont nodejs-multistage-app
+                   docker run -d --name nodejscont -p 8085:3000 nodejs-multistage-app
                    '''
             }
         }
