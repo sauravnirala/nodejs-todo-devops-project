@@ -17,12 +17,12 @@ FROM node:18 AS build
 WORKDIR /app
 COPY package*.json ./
 RUN npm install
-COPY . /app
+COPY . .
 RUN npm run build
 
 FROM node:18-alpine
 COPY --from=build /app /app
-EXPOSE 8085
+EXPOSE 3000
 CMD ["node", "app.js"]
 EOF
 
