@@ -43,8 +43,8 @@ docker build --no-cache -t nodejs-multistage-app .
                 withCredentials([usernamePassword(credentialsId: 'dockercred', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                     sh '''
                         echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
-                        docker tag nodejs-multistage-app $DOCKER_HUB_REPO:latest
-                        docker push $DOCKER_HUB_REPO:latest
+                        docker tag nodejs-multistage-app $DOCKER_HUB_REPO:v1
+                        docker push $DOCKER_HUB_REPO:v1
                     '''
                 }
             }
@@ -57,7 +57,7 @@ docker build --no-cache -t nodejs-multistage-app .
                 sh '''
                    docker stop nodejscont || true
                    docker rm nodejscont || true
-                   docker run -d --name nodejscont -p 8085:3000 $DOCKER_HUB_REPO:latest
+                   docker run -d --name nodejscont -p 8085:3000 $DOCKER_HUB_REPO:v1
                    '''
             }
         }
