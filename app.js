@@ -6,7 +6,7 @@ app.use(express.json());
 let tasks = [];
 
 app.get("/", (req,res)=>{
- res.send("Node.js Todo App Running");
+ res.sendFile(path.join(__dirname,"index.html"));
 });
 
 app.get("/tasks",(req,res)=>{
