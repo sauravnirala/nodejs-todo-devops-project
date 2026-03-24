@@ -66,7 +66,7 @@
 						kubectl apply -f lbproject.yml
 
 						# Update image to the new pushed version
-						kubectl set image deployment/njdeploy njdeploy=$DOCKER_HUB_REPO:v2
+						kubectl set image deployment/njdeploy njcont=$DOCKER_HUB_REPO:v2
 
 						# Wait for rollout to finish
 						kubectl rollout status deployment/njdeploy
