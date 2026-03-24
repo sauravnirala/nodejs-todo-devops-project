@@ -66,10 +66,10 @@
 						kubectl apply -f lbproject.yml
 
 						# Update image to the new pushed version
-						kubectl set image deployment/nodejs-todo-app nodejs-todo-app=$DOCKER_HUB_REPO:v2
+						kubectl set image deployment/njdeploy njdeploy=$DOCKER_HUB_REPO:v2
 
 						# Wait for rollout to finish
-						kubectl rollout status deployment/nodejs-todo-app
+						kubectl rollout status deployment/njdeploy
 
 					'''
 			}
@@ -77,7 +77,7 @@
 				success {
 					emailext(
 						subject: "Kubernetes Deploy Success",
-						body: "nodejs-todo-app deployed successfully. Image: ${DOCKER_HUB_REPO}:v2",
+						body: "njdeploy deployed successfully. Image: ${DOCKER_HUB_REPO}:v2",
 						to: "sauravnirala44@gmail.com"
 					)
 			
