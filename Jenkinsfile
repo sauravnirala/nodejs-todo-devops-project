@@ -33,7 +33,7 @@
 
 			stage('DOCKER LOGIN & PUSH') {
 				steps {
-					withCredentials([usernamePassword(credentialsId: 'dockercred', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+					withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
 						sh '''
 							echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
 							docker tag nodejs-multistage-app $DOCKER_HUB_REPO:v2
