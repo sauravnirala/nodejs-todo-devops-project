@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: njdeploy
+  labels:
+    app: nd
+
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nd
+  template:
+    metadata:
+      labels:
+        app: nd
+
+    spec:
+      containers:
+       - name: njcont
+         image: sauravnirala/nodejs-todo-devops-project:v1
+         ports:
+           - containerPort: 3000
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: njserviceloadblancer
+
+spec:
+  selector:
+     app: nd
+  ports:
+     - protocol: TCP
+       port: 80
+       targetPort: 3000
+  type: LoadBalancer
+
