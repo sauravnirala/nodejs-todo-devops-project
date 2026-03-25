@@ -16,7 +16,7 @@
 						emailext(
 							subject: "checkout Success",
 							body: "checkout completed",
-							to: "sauravnirala44@gmail.com"
+							to: "sauravnirala240@gmail.com"
 						)
 					}
 				}
@@ -47,7 +47,7 @@
 						emailext(
 							subject: "hub login",
 							body: "image pushed",
-							to: "sauravnirala44@gmail.com"
+							to: "sauravnirala240@gmail.com"
 						)
 					}
 				}
@@ -78,7 +78,7 @@
 					emailext(
 						subject: "Kubernetes Deploy Success",
 						body: "njdeploy deployed successfully. Image: ${DOCKER_HUB_REPO}:v2",
-						to: "sauravnirala44@gmail.com"
+						to: "sauravnirala240@gmail.com"
 					)
 			
 				}
