@@ -20,6 +20,7 @@
                         to: "${EMAIL}"
                     )
                 }
+			
                 failure {
                     emailext(
                         subject: "Checkout FAILED",
@@ -28,6 +29,7 @@
                     )
                 }
 
+			}
 			}
 
 			stage('Build Docker Image') {
@@ -50,15 +52,6 @@
 					}
 				}
 				
-				post {
-					success {
-						emailext(
-							subject: "hub login",
-							body: "image pushed",
-							to: "sauravnirala240@gmail.com"
-						)
-					}
-				}
 			}
 			
 			stage('Docker Logout') {
@@ -83,27 +76,27 @@
 			    }
 			}
 			
-		// Final Summary Email
-    post {
-        always {
-            emailext(
-                subject: "📊 Pipeline Result: ${currentBuild.currentResult}",
-                body: """
-                Pipeline Execution Completed
+			// Final Summary Email
+			post {
+				always {
+					emailext(
+						subject: "Pipeline Result: ${currentBuild.currentResult}",
+						body: """
+						Pipeline Execution Completed
 
-                Job: ${env.JOB_NAME}
-                Build: ${env.BUILD_NUMBER}
-                Status: ${currentBuild.currentResult}
+						Job: ${env.JOB_NAME}
+						Build: ${env.BUILD_NUMBER}
+						Status: ${currentBuild.currentResult}
 
-                Docker Image: ${DOCKER_HUB_REPO}:v2
-                """,
-                to: "${EMAIL}"
-            )
-        }
-    }
+						Docker Image: ${DOCKER_HUB_REPO}:v2
+						""",
+						to: "${EMAIL}"
+					)
+				}
+			}
+		}
 
-    }
-}
-}
+	}
+
 	
 
