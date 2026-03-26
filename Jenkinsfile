@@ -75,6 +75,7 @@
 					'''
 			    }
 			}
+		}
 			
 			// Final Summary Email
 			post {
@@ -94,7 +95,6 @@
 					)
 				}
 			}
-		}
 
 	}
 
